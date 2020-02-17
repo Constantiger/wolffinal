@@ -12,8 +12,6 @@
 
 #include "head.h"
 
-#include "stdio.h"
-
 void	push_enemy(t_sdl *sdl, int x, int y)
 {
 	if (sdl->obj_count < 200)
@@ -61,23 +59,11 @@ void	damage_enemy(t_sdl *sdl, int ind)
 	}
 }
 
-void	coll_enemy(t_sdl *sdl, int ind)
+void	coll_enemy_dx(t_sdl *sdl, float dx, int ind)
 {
-	float	dx;
-	float	dy;
-	int		i;
-	float	b;
+	int i;
 
 	i = 0;
-	dx = (sdl->obj[ind].p.v[0] - sdl->obj[ind].pl.v[0]) * 0.021;
-	dy = (sdl->obj[ind].p.v[1] - sdl->obj[ind].pl.v[1]) * 0.021;
-	b = sdl->obj[ind].bord / 2;
-	sdl->obj[ind].p.v[0] -= dx;
-	if (wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] - b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] + b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] - b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] + b))
-		sdl->obj[ind].p.v[0] += dx;
 	while (i < sdl->obj_count)
 	{
 		if (sdl->obj[i].iter && i != ind)
@@ -88,12 +74,12 @@ void	coll_enemy(t_sdl *sdl, int ind)
 		}
 		i++;
 	}
-	sdl->obj[ind].p.v[1] -= dy;
-	if (wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] - b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] + b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] - b) ||
-		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] + b))
-		sdl->obj[ind].p.v[1] += dy;
+}
+
+void	coll_enemy_dy(t_sdl *sdl, float dy, int ind)
+{
+	int i;
+
 	i = 0;
 	while (i < sdl->obj_count)
 	{
@@ -105,6 +91,31 @@ void	coll_enemy(t_sdl *sdl, int ind)
 		}
 		i++;
 	}
+}
+
+void	coll_enemy(t_sdl *sdl, int ind)
+{
+	float	dx;
+	float	dy;
+	float	b;
+
+	dx = (sdl->obj[ind].p.v[0] - sdl->obj[ind].pl.v[0]) * 0.021;
+	dy = (sdl->obj[ind].p.v[1] - sdl->obj[ind].pl.v[1]) * 0.021;
+	b = sdl->obj[ind].bord / 2;
+	sdl->obj[ind].p.v[0] -= dx;
+	if (wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] - b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] + b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] - b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] + b))
+		sdl->obj[ind].p.v[0] += dx;
+	coll_enemy_dx(sdl, dx, ind);
+	sdl->obj[ind].p.v[1] -= dy;
+	if (wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] - b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] - b, sdl->obj[ind].p.v[1] + b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] - b) ||
+		wallat(sdl, sdl->obj[ind].p.v[0] + b, sdl->obj[ind].p.v[1] + b))
+		sdl->obj[ind].p.v[1] += dy;
+	coll_enemy_dy(sdl, dy, ind);
 }
 
 void	see_enemy(t_sdl *sdl, int ind)
@@ -130,6 +141,34 @@ void	see_enemy(t_sdl *sdl, int ind)
 		sdl->obj[ind].see = 0;
 }
 
+void	move_enemy_helper(t_sdl *sdl, int ind)
+{
+	if (sdl->obj[ind].len < 1.1)
+	{
+		if (sdl->obj[ind].move)
+		{
+			sdl->obj[ind].move = 0;
+			sdl->obj[ind].atack = 1;
+			sdl->obj[sdl->obj_count].anim = 1;
+			sdl->obj[ind].txtr = 11;
+		}
+	}
+	else if (!sdl->obj[ind].atack)
+	{
+		sdl->obj[ind].move = 1;
+		sdl->obj[ind].txtr = 10;
+	}
+	if (sdl->obj[ind].atack && sdl->obj[ind].anim == 57)
+	{
+		if (sdl->obj[ind].len < 1.5)
+			set_hp(sdl, -10);
+		sdl->obj[ind].move = sdl->obj[ind].see;
+		sdl->obj[ind].atack = 0;
+		sdl->obj[sdl->obj_count].anim = 10;
+		sdl->obj[ind].txtr = 10;
+	}
+}
+
 void	move_enemy(t_sdl *sdl, int ind)
 {
 	see_enemy(sdl, ind);
@@ -149,39 +188,9 @@ void	move_enemy(t_sdl *sdl, int ind)
 		sdl->obj[ind].txtr = 10;
 	}
 	else
-	{
-		if (sdl->obj[ind].len < 1.1)
-		{
-			if (sdl->obj[ind].move)
-			{
-				sdl->obj[ind].move = 0;
-				sdl->obj[ind].atack = 1;
-				sdl->obj[sdl->obj_count].anim = 1;
-				sdl->obj[ind].txtr = 11;
-			}
-		}
-		else
-		{
-			if (!sdl->obj[ind].atack)
-			{
-				sdl->obj[ind].move = 1;
-				sdl->obj[ind].txtr = 10;
-			}
-		}
-		if (sdl->obj[ind].atack && sdl->obj[ind].anim == 57)
-		{
-			if (sdl->obj[ind].len < 1.5)
-				set_hp(sdl, -10);
-			sdl->obj[ind].move = sdl->obj[ind].see;
-			sdl->obj[ind].atack = 0;
-			sdl->obj[sdl->obj_count].anim = 10;
-			sdl->obj[ind].txtr = 10;
-		}
-		if (sdl->obj[ind].move)
-		{
-			coll_enemy(sdl, ind);
-		}
-	}
+		move_enemy_helper(sdl, ind);
+	if (sdl->obj[ind].move)
+		coll_enemy(sdl, ind);
 }
 
 void	death_enemy(void *s, int ind)
@@ -220,34 +229,32 @@ void	anim_enemy(void *s, int ind)
 	}
 }
 
-void	put_enemy(t_sdl *sdl, int ind, int x, int y, int size)
+void	put_enemy(t_sdl *sdl, int ind, int x, int size)
 {
 	int		i;
 	int		j;
 	int		color;
-	float	tx;
-	float	ty;
+	int		y;
 
+	y = (WIN_H - size) / 2 + (atan((sdl->height -
+	sdl->obj[ind].p.v[2]) / sdl->obj[ind].len)) / sdl->ang + sdl->y_ang_i;
 	i = 0;
-	j = 0;
 	while (i < size)
 	{
+		j = 0;
 		while (j < size)
 		{
-			if ((i + x) < 0 || (i + x) > sdl->size)
+			if ((i + x) < 0 || (i + x) > sdl->size ||
+			(sdl->l[i + x].v[2] < sdl->obj[ind].len))
 				break ;
-			if (sdl->l[i + x].v[2] < sdl->obj[ind].len)
-				break ;
-			tx = (float)i / size;
-			ty = (float)j / size / sdl->obj[ind].fram +
-				(float)(sdl->obj[ind].anim / 15) / sdl->obj[ind].fram;
-			color = texturebmp(sdl, tx, ty, sdl->obj[ind].txtr);
+			color = texturebmp(sdl, (float)i / size, (float)j / size /
+			sdl->obj[ind].fram + (float)(sdl->obj[ind].anim / 15) /
+			sdl->obj[ind].fram, sdl->obj[ind].txtr);
 			if ((color & 255) != 255)
 				put_pixel(sdl, i + x + sdl->off, j + y, color);
 			j++;
 		}
 		i++;
-		j = 0;
 	}
 }
 
@@ -255,7 +262,6 @@ void	draw_enemy(void *s, int ind)
 {
 	int		l;
 	int		x;
-	int		y;
 	float	size;
 	t_sdl	*sdl;
 
@@ -263,12 +269,9 @@ void	draw_enemy(void *s, int ind)
 	size = atan(sdl->obj[ind].size / sdl->obj[ind].len) / sdl->ang;
 	l = xon_screen(sdl, set_v(sdl->obj[ind].p.v[0],
 					sdl->obj[ind].p.v[1], sdl->obj[ind].p.v[2]));
-	y = (WIN_H - size) / 2 +
-				(atan((sdl->height - sdl->obj[ind].p.v[2]) /
-				sdl->obj[ind].len)) / sdl->ang + sdl->y_ang_i;
 	if (sdl->obj[ind].txtr == 14)
 		sdl->obj[ind].fram = 8;
 	else
 		sdl->obj[ind].fram = 4;
-	put_enemy(sdl, ind, l - size / 2, y, size);
+	put_enemy(sdl, ind, l - size / 2, size);
 }
