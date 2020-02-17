@@ -17,4 +17,4 @@ all:
 	doorx.c doory.c bmp.c skybox.c object.c actfunc.c \
 	animfunc.c text.c enemy.c weapon.c set.c tiles.c tiles2.c \
 	load_res.c \
-	tiles3.c hp.c -I include -L lib -l SDL2-2.0.0 -lSDL2_mixer  -O3
+	tiles3.c hp.c -I include -L lib -lSDL2-2.0.0 -lSDL2_mixer  -O3
