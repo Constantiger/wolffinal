@@ -76,33 +76,32 @@ void	push_key(t_sdl *sdl, int x, int y)
 	}
 }
 
-void	put_obj(t_sdl *sdl, int ind, int x, int y, int size)
+void	put_obj(t_sdl *sdl, int ind, int x, int size)
 {
 	int		i;
 	int		j;
 	int		color;
-	float	tx;
-	float	ty;
+	int		y;
 
 	i = 0;
-	j = 0;
+	y = (WIN_H - size) / 2 + (atan((sdl->height -
+	sdl->obj[ind].p.v[2]) / sdl->obj[ind].len)) / sdl->ang + sdl->y_ang_i;
 	while (i < size)
 	{
+		j = 0;
 		while (j < size)
 		{
 			if ((i + x) < 0 || (i + x) > sdl->size)
 				break ;
 			if (sdl->l[i + x].v[2] < sdl->obj[ind].len)
 				break ;
-			tx = (float)i / size;
-			ty = (float)j / size;
-			color = texturebmp(sdl, tx, ty, sdl->obj[ind].txtr);
+			color = texturebmp(sdl, (float)i / size,
+			(float)j / size, sdl->obj[ind].txtr);
 			if ((color & 255) != 255)
 				put_pixel(sdl, i + x + sdl->off, j + y, color);
 			j++;
 		}
 		i++;
-		j = 0;
 	}
 }
 
@@ -110,7 +109,6 @@ void	draw_obj(void *s, int ind)
 {
 	int		l;
 	int		x;
-	int		y;
 	float	size;
 	t_sdl	*sdl;
 
@@ -118,8 +116,5 @@ void	draw_obj(void *s, int ind)
 	size = atan(sdl->obj[ind].size / sdl->obj[ind].len) / sdl->ang;
 	l = xon_screen(sdl, set_v(sdl->obj[ind].p.v[0],
 				sdl->obj[ind].p.v[1], sdl->obj[ind].p.v[2]));
-	y = (WIN_H - size) / 2 +
-		(atan((sdl->height - sdl->obj[ind].p.v[2]) /
-		sdl->obj[ind].len)) / sdl->ang + sdl->y_ang_i;
-	put_obj(sdl, ind, l - size / 2, y, size);
+	put_obj(sdl, ind, l - size / 2, size);
 }
