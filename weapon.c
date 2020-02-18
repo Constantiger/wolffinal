@@ -81,7 +81,11 @@ void	shoot(t_sdl *sdl)
 		sdl->reload = 1;
 		push_proj(sdl);
 		set_arrows(sdl, -1);
-		Mix_PlayChannel(-1, sdl->gchunk, 0);
+		if (Mix_PlayChannel(-1, sdl->gchunk, 0) == -1)
+		{
+			write(1, "error play chan\n", 16);
+            quit(sdl);
+		}
 	}
 }
 

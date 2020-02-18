@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:02:19 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 19:19:03 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/18 16:56:30 by sdiego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	quit(t_sdl *s)
 	if (s->gchunk != NULL)
 		Mix_FreeChunk(s->gchunk);
 	s->gchunk = NULL;
+	Mix_CloseAudio();
 	Mix_Quit();
 	SDL_Quit();
 	exit(1);
