@@ -98,6 +98,7 @@ void	quit(t_sdl *s)
 	if (s->gchunk != NULL)
 		Mix_FreeChunk(s->gchunk);
 	s->gchunk = NULL;
+	Mix_CloseAudio();
 	Mix_Quit();
 	SDL_Quit();
 	exit(1);
