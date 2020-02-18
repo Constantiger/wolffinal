@@ -237,5 +237,6 @@ void				load_texture(t_sdl *sdl, const char *fname);
 void				load_textures(t_sdl *sdl);
 void				load_audio(t_sdl *sdl);
 void				quit(t_sdl *sdl);
+void				move_proj(t_sdl *sdl, int ind);
 
 #endif

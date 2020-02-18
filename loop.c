@@ -510,7 +510,7 @@ void    loop(t_sdl *sdl)
     while (sdl->run)
     {
 
-        while((void*)SDL_PollEvent(&sdl->event) != NULL)
+        while(SDL_PollEvent(&sdl->event) != 0)
         {
             if (sdl->event.type == SDL_QUIT)
                 sdl->run = 0;
