@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:11:12 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 20:04:14 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/18 13:29:10 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_top(int x, int y, t_vect p, t_sdl *sdl)
 	float	d;
 	int		ya;
 
-	while (y > 0)
+	while (y >= 0)
 	{
 		ya = -sdl->y_ang_i - HWH + y;
 		ya = (ya + sdl->tngm) % sdl->tngm;
