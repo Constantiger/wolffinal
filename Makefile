@@ -6,7 +6,7 @@
 #    By: aannara <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/17 13:24:05 by aannara           #+#    #+#              #
-#    Updated: 2020/02/18 16:27:09 by aannara          ###   ########.fr        #
+#    Updated: 2020/02/18 18:05:05 by aannara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = main.c draw.c load.c vect.c loop.c raycast.c \
 	doorx.c doory.c bmp.c skybox.c object.c actfunc.c \
 	animfunc.c text.c enemy.c weapon.c weapon2.c set.c tiles.c tiles2.c \
 	load_res.c tiles3.c hp.c move.c move2.c key.c envi.c mouse.c \
-	action.c
+	action.c render.c render2.c render3.c
 
 OBJ = $(SRC:.c=.o)
 

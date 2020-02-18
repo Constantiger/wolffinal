@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/18 16:23:01 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:41:36 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,5 +249,14 @@ void				key_logic(t_sdl *sdl);
 void				mousedown(t_sdl *sdl);
 void				mousemove(t_sdl *sdl);
 void				click(t_sdl *sdl);
+void				draw_bmp(t_sdl *sdl, int sx, int sy, int ind);
+void				draw_skybox(t_sdl *sdl);
+void				draw_gui(t_sdl *sdl);
+void				draw_fow(t_sdl *sdl);
+void				draw_ray(t_sdl *s, t_ray r);
+void				draw_map(t_sdl *s);
+void				draw_ceil(int x, int y, t_vect p, t_sdl *sdl);
+void				draw_flor(int x, int y, t_vect p, t_sdl *sdl);
+int					texture_ind(t_sdl *sdl, int i);
 
 #endif
