@@ -434,11 +434,7 @@ int main(int argc, char **argv)
 	SDL_ShowCursor(SDL_DISABLE);
 	if( Mix_PlayingMusic() == 0 )
 	{
-		if (Mix_PlayMusic( sdl.gmusic, -1) == -1)
-            {
-                write(1, "error play mus\n", 15);
-                quit(&sdl);
-            }
+		Mix_PlayMusic( sdl.gmusic, -1 );
 		Mix_VolumeMusic(MIX_MAX_VOLUME / 12);
 	}
 	loop(&sdl);

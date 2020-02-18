@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 19:04:12 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/18 16:23:01 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,5 +238,16 @@ void				load_textures(t_sdl *sdl);
 void				load_audio(t_sdl *sdl);
 void				quit(t_sdl *sdl);
 void				move_proj(t_sdl *sdl, int ind);
+void				wall_coll(t_sdl *sdl);
+void				move(t_sdl *sdl);
+void				jump_f(t_sdl *sdl);
+void				collx_cicle(t_sdl *s, float sign);
+void				colly_cicle(t_sdl *s, float sign);
+void				keyup(t_sdl *sdl);
+void				keydown(t_sdl *sdl);
+void				key_logic(t_sdl *sdl);
+void				mousedown(t_sdl *sdl);
+void				mousemove(t_sdl *sdl);
+void				click(t_sdl *sdl);
 
 #endif
