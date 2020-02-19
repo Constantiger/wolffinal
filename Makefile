@@ -14,7 +14,7 @@ SRC = main.c draw.c load.c vect.c loop.c raycast.c \
 	doorx.c doory.c bmp.c skybox.c object.c actfunc.c \
 	animfunc.c text.c weapon.c weapon2.c set.c tiles.c tiles2.c \
 	load_res.c tiles3.c hp.c move.c move2.c key.c envi.c mouse.c \
-	action.c render.c render2.c render3.c enemy.c enemy2.c enemy3.c
+	action.c render.c render2.c render3.c enemy.c enemy2.c enemy3.c quit.c
 
 OBJ = $(SRC:.c=.o)
 
