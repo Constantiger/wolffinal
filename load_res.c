@@ -21,7 +21,7 @@ void	load_texture(t_sdl *sdl, const char *fname)
 		&sdl->my[sdl->text_count]);
 		if (sdl->bmp[sdl->text_count] == NULL)
 		{
-			write(1,"error load\n", 11);
+			write(1, "error load\n", 11);
 			quit(sdl);
 		}
 	}
@@ -77,34 +77,4 @@ void	free_textures(t_sdl *s)
 		free(s->bmp[i]);
 		i++;
 	}
-}
-
-void	quit(t_sdl *s)
-{
-	if (s->win != NULL)
-		SDL_DestroyWindow(s->win);
-	s->win = NULL;
-	if (s->ren != NULL)
-		SDL_DestroyRenderer(s->ren);
-	s->ren = NULL;
-	if (s->text != NULL)
-		SDL_DestroyTexture(s->text);
-	s->text = NULL;
-	if (s->img != NULL)
-		free(s->img);
-	s->img = NULL;
-	if (s->tang != NULL)
-		free(s->tang);
-	s->tang = NULL;
-	free_textures(s);
-	if (s->gmusic != NULL)
-		Mix_FreeMusic(s->gmusic);
-	s->gmusic = NULL;
-	if (s->gchunk != NULL)
-		Mix_FreeChunk(s->gchunk);
-	s->gchunk = NULL;
-	Mix_CloseAudio();
-	Mix_Quit();
-	SDL_Quit();
-	exit(1);
 }
