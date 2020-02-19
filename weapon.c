@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 10:58:48 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/17 17:23:45 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 12:37:45 by sdiego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	shoot(t_sdl *sdl)
 		if (Mix_PlayChannel(-1, sdl->gchunk, 0) == -1)
 		{
 			write(1, "error play chan\n", 16);
-            quit(sdl);
+			quit(sdl);
 		}
 	}
 }
