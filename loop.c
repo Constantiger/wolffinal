@@ -56,6 +56,19 @@ void	logic(t_sdl *sdl)
 	sdl->x_ang_i = (int)(sdl->x_ang / sdl->ang + sdl->tngm) % sdl->tngm;
 }
 
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char *p;
+
+	p = (unsigned char*)b;
+	while (len)
+	{
+		*(p++) = (unsigned char)c;
+		len--;
+	}
+	return (b);
+}
+
 void	loop(t_sdl *sdl)
 {
 	while (sdl->run)
@@ -73,7 +86,7 @@ void	loop(t_sdl *sdl)
 			if (sdl->event.type == SDL_MOUSEBUTTONDOWN)
 				mousedown(sdl);
 		}
-		memset(sdl->img, 0, WIN_L * WIN_H * sizeof(int));
+		ft_memset(sdl->img, 0, WIN_L * WIN_H * sizeof(int));
 		key_logic(sdl);
 		logic(sdl);
 		draw(sdl);
