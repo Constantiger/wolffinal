@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/18 17:41:36 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:27:40 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,5 +258,8 @@ void				draw_map(t_sdl *s);
 void				draw_ceil(int x, int y, t_vect p, t_sdl *sdl);
 void				draw_flor(int x, int y, t_vect p, t_sdl *sdl);
 int					texture_ind(t_sdl *sdl, int i);
+void				move_enemy(t_sdl *sdl, int ind);
+void				see_enemy(t_sdl *sdl, int ind);
+void				coll_enemy(t_sdl *sdl, int ind);
 
 #endif
