@@ -12,7 +12,7 @@
 
 #include "head.h"
 
-void	push_doorx(t_sdl *sdl, int x, int y)
+void	push_doorx_help(t_sdl *sdl, int x, int y)
 {
 	if (sdl->doorx_count < 100)
 	{
@@ -20,6 +20,11 @@ void	push_doorx(t_sdl *sdl, int x, int y)
 		sdl->doorx[sdl->doorx_count].v[1] = y + 0.5;
 		sdl->doorx_count++;
 	}
+}
+
+void	push_doorx(t_sdl *sdl, int x, int y)
+{
+	push_doorx_help(sdl, x, y);
 	if (sdl->obj_count < 200)
 	{
 		sdl->obj[sdl->obj_count].p.v[0] = x + 0.5;
@@ -42,22 +47,6 @@ void	push_doorx(t_sdl *sdl, int x, int y)
 	}
 }
 
-t_vect	cast_doorx1(t_sdl *sdl, float t, int i)
-{
-	t_vect	res;
-	float	dx;
-	float	d;
-
-	d = (int)sdl->r.p.v[0] - sdl->doory[i].v[0];
-	dx = sdl->r.p.v[0] - (int)sdl->r.p.v[0];
-	res.v[1] = sdl->r.p.v[1] - t * dx - d * t;
-	res.v[0] = sdl->doorx[i].v[0];
-	t = res.v[0] - sdl->r.p.v[0];
-	d = res.v[1] - sdl->r.p.v[1];
-	res.v[2] = sqrt(t * t + d * d);
-	return (res);
-}
-
 t_vect	cast_doorx2(t_sdl *sdl, float t, int i)
 {
 	t_vect	res;
@@ -73,18 +62,22 @@ t_vect	cast_doorx2(t_sdl *sdl, float t, int i)
 	return (res);
 }
 
+void	set_paramx(t_sdl *sdl, int *l1, int *l2, int ind)
+{
+	*l1 = xon_screen(sdl, set_v(sdl->doorx[ind].v[0],
+				sdl->doorx[ind].v[1] - 0.5, sdl->doorx[ind].v[2]));
+	*l2 = xon_screen(sdl, set_v(sdl->doorx[ind].v[0],
+				sdl->doorx[ind].v[1] + 0.5, sdl->doorx[ind].v[2]));
+}
+
 void	draw_doorx(t_sdl *sdl, int ind)
 {
 	int		l1;
 	int		l2;
 	int		i;
 	t_vect	len2;
-	int		max2;
 
-	l1 = xon_screen(sdl, set_v(sdl->doorx[ind].v[0],
-				sdl->doorx[ind].v[1] - 0.5, sdl->doorx[ind].v[2]));
-	l2 = xon_screen(sdl, set_v(sdl->doorx[ind].v[0],
-				sdl->doorx[ind].v[1] + 0.5, sdl->doorx[ind].v[2]));
+	set_paramx(sdl, &l1, &l2, ind);
 	if (l2 < l1)
 		swapi(&l1, &l2);
 	if (l2 - l1 > 1900)
@@ -93,8 +86,7 @@ void	draw_doorx(t_sdl *sdl, int ind)
 		i = 0;
 	else
 		i = l1;
-	max2 = l2;
-	while (i < l2 && i < sdl->size)
+	while (i < l2 && i++ < sdl->size)
 	{
 		len2 = cast_doorx2(sdl, sdl->tang[sdl->ar[i].a_i], ind);
 		if (sdl->l[i].v[2] > len2.v[2])
@@ -104,6 +96,5 @@ void	draw_doorx(t_sdl *sdl, int ind)
 			sdl->l[i].v[2] = len2.v[2];
 			draw_doors(sdl, l1, l2, i);
 		}
-		i++;
 	}
 }

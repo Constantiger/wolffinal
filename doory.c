@@ -12,7 +12,7 @@
 
 #include "head.h"
 
-void	push_doory(t_sdl *sdl, int x, int y)
+void	push_doory_help(t_sdl *sdl, int x, int y)
 {
 	if (sdl->doory_count < 100)
 	{
@@ -21,6 +21,11 @@ void	push_doory(t_sdl *sdl, int x, int y)
 		sdl->obj[sdl->obj_count].act_f = &act_doory;
 		sdl->doory_count++;
 	}
+}
+
+void	push_doory(t_sdl *sdl, int x, int y)
+{
+	push_doory_help(sdl, x, y);
 	if (sdl->obj_count < 200)
 	{
 		sdl->obj[sdl->obj_count].p.v[0] = x + 0.5;
@@ -61,21 +66,12 @@ t_vect	cast_doory1(t_sdl *sdl, float t, int i)
 	return (res);
 }
 
-t_vect	cast_doory2(t_sdl *sdl, float t, int i)
+void	set_paramy(t_sdl *sdl, int *l1, int *l2, int ind)
 {
-	t_vect	res;
-	float	dy;
-	float	d;
-
-	d = sdl->doory[i].v[1] - (int)sdl->r.p.v[1];
-	t = 1 / t;
-	dy = sdl->r.p.v[1] - (int)sdl->r.p.v[1];
-	res.v[0] = sdl->r.p.v[0] - t * d + t * dy;
-	res.v[1] = sdl->doory[i].v[1];
-	t = res.v[0] - sdl->r.p.v[0];
-	d = res.v[1] - sdl->r.p.v[1];
-	res.v[2] = sqrt(t * t + d * d);
-	return (res);
+	*l1 = xon_screen(sdl, set_v(sdl->doory[ind].v[0] - 0.5,
+				sdl->doory[ind].v[1], sdl->doory[ind].v[2]));
+	*l2 = xon_screen(sdl, set_v(sdl->doory[ind].v[0] + 0.5,
+				sdl->doory[ind].v[1], sdl->doory[ind].v[2]));
 }
 
 void	draw_doory(t_sdl *sdl, int ind)
@@ -84,12 +80,8 @@ void	draw_doory(t_sdl *sdl, int ind)
 	int		l2;
 	int		i;
 	t_vect	len2;
-	int		max2;
 
-	l1 = xon_screen(sdl, set_v(sdl->doory[ind].v[0] - 0.5,
-				sdl->doory[ind].v[1], sdl->doory[ind].v[2]));
-	l2 = xon_screen(sdl, set_v(sdl->doory[ind].v[0] + 0.5,
-				sdl->doory[ind].v[1], sdl->doory[ind].v[2]));
+	set_paramy(sdl, &l1, &l2, ind);
 	if (l2 < l1)
 		swapi(&l1, &l2);
 	if (l2 - l1 > 1900)
@@ -98,8 +90,7 @@ void	draw_doory(t_sdl *sdl, int ind)
 		i = 0;
 	else
 		i = l1;
-	max2 = l2;
-	while (i < l2 && i < sdl->size)
+	while (i < l2 && i++ < sdl->size)
 	{
 		len2 = cast_doory1(sdl, sdl->tang[sdl->ar[i].a_i], ind);
 		if (sdl->l[i].v[2] > len2.v[2])
@@ -109,6 +100,5 @@ void	draw_doory(t_sdl *sdl, int ind)
 			sdl->l[i].v[2] = len2.v[2];
 			draw_doors(sdl, l1, l2, i);
 		}
-		i++;
 	}
 }
