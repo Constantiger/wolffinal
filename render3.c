@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:59:17 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/18 18:06:14 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:04:50 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		texturebmp(t_sdl *sdl, float x, float y, int ind)
 	int	tx;
 	int	ty;
 
-	tx = x * sdl->mx[ind];
-	ty = y * sdl->my[ind];
+	tx = x * (sdl->mx[ind] - 1);
+	ty = y * (sdl->my[ind] - 1);
 	return (*(sdl->bmp[ind] + ty * sdl->mx[ind] + tx));
 }
 
@@ -54,7 +54,7 @@ void	draw_ceil(int x, int y, t_vect p, t_sdl *sdl)
 	float	d;
 	int		ya;
 
-	while (y > 0)
+	while (y >= 0)
 	{
 		ya = -sdl->y_ang_i - HWH + y;
 		ya = (ya + sdl->tngm) % sdl->tngm;

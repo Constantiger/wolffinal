@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 10:58:48 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/19 12:37:45 by sdiego           ###   ########.fr       */
+/*   Updated: 2020/02/19 14:44:42 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	draw_weapon(t_sdl *sdl, int size)
 	int		color;
 
 	i = 0;
-	j = 0;
+	j = 3;
 	while (j < size / 32 * 15)
 	{
 		while (i < size)
