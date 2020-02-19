@@ -263,5 +263,6 @@ void				move_enemy(t_sdl *sdl, int ind);
 void				see_enemy(t_sdl *sdl, int ind);
 void				coll_enemy(t_sdl *sdl, int ind);
 void				free_textures(t_sdl *s);
+void				music(t_sdl *sdl);
 
 #endif

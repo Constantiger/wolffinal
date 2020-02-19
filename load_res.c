@@ -78,3 +78,16 @@ void	free_textures(t_sdl *s)
 		i++;
 	}
 }
+
+void	music(t_sdl *sdl)
+{
+	if (Mix_PlayingMusic() == 0)
+	{
+		if (Mix_PlayMusic(sdl->gmusic, -1) == -1)
+		{
+			write(1, "error play mus\n", 15);
+			quit(sdl);
+		}
+		Mix_VolumeMusic(MIX_MAX_VOLUME / 12);
+	}
+}
