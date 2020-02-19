@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:54:50 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 18:18:29 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:14:57 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ t_vect	cast_ray(t_sdl *sdl, t_ray r)
 	t_vect	resx;
 	t_vect	resy;
 	float	t;
-	float	t2;
 
 	t = sdl->tang[r.a_i];
 	if (r.a_i <= sdl->hpi || r.a_i >= sdl->pihpi)
@@ -126,12 +125,8 @@ t_vect	cast_ray(t_sdl *sdl, t_ray r)
 		resy = cast_y1(sdl, r, t);
 	else
 		resy = cast_y2(sdl, r, t);
-	t = sdl->r.p.v[0] - resx.v[0];
-	t2 = sdl->r.p.v[1] - resx.v[1];
-	resx.v[2] = t * t + t2 * t2;
-	t = sdl->r.p.v[0] - resy.v[0];
-	t2 = sdl->r.p.v[1] - resy.v[1];
-	resy.v[2] = t * t + t2 * t2;
+	vect_len(sdl, &resx);
+	vect_len(sdl, &resy);
 	if (resx.v[2] < resy.v[2])
 	{
 		resx.v[2] = sqrt(resx.v[2]);
