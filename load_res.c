@@ -19,6 +19,11 @@ void	load_texture(t_sdl *sdl, const char *fname)
 		sdl->bmp[sdl->text_count] = loadbmp(fname,
 		&sdl->mx[sdl->text_count],
 		&sdl->my[sdl->text_count]);
+		if (sdl->bmp[sdl->text_count] == NULL)
+		{
+			write(1,"error load\n", 11);
+			quit(sdl);
+		}
 	}
 	sdl->text_count++;
 }

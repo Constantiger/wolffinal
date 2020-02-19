@@ -57,7 +57,10 @@ int		*loadbmp(const char *fn, int *mx, int *my)
 	*my = -1;
 	fd = open(fn, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+	{
+		write(1, "error open\n", 11);
+		return(NULL);
+	}
 	res = read(fd, (void*)(&bh), sizeof(t_bmp));
 	if (res != sizeof(t_bmp))
 	{
