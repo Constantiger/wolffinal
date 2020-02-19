@@ -101,7 +101,6 @@ void	draw_sky(t_sdl *sdl)
 	int		color;
 
 	i = 0;
-	j = 0;
 	while (i < sdl->size)
 	{
 		k = atan(0.5 / sdl->l[i].v[2]) / sdl->ang;
