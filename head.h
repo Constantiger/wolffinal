@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/19 15:27:40 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 16:00:59 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void				put_pixel(t_sdl *sdl, int x, int y, int color);
 void				draw(t_sdl *s);
 int					load_map(t_sdl *s);
 t_vect				set_v(float x, float y, float z);
+void				set_vc(t_vect *v, float x, float y, int c);
 int					c(int r, int g, int b);
 t_vect				cast_ray(t_sdl *sdl, t_ray r);
 char				check(t_vect *r);

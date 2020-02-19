@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:11:12 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/18 13:29:10 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/19 16:05:00 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int		sky_text(t_sdl *sdl, float x, float y, int ind)
 {
-	int	tx;
-	int	ty;
 	int	size;
 	int	ox;
 	int	oy;
@@ -38,10 +36,8 @@ int		sky_text(t_sdl *sdl, float x, float y, int ind)
 		ox = (ind - 2) * size;
 		oy = size;
 	}
-	tx = x * size;
-	ty = y * size;
-	return (*(sdl->bmp[sdl->sky_i] + (ty + oy)
-				* sdl->mx[sdl->sky_i] + (tx + ox)));
+	return (*(sdl->bmp[sdl->sky_i] + ((int)(y * size) + oy)
+				* sdl->mx[sdl->sky_i] + ((int)(x * size) + ox)));
 }
 
 void	draw_top(int x, int y, t_vect p, t_sdl *sdl)
@@ -116,7 +112,6 @@ void	draw_sky(t_sdl *sdl)
 			put_pixel(sdl, i + sdl->off, j + HWH, color);
 			j++;
 		}
-		draw_bot(i, j + HWH, sdl->l[i], sdl);
 		i++;
 	}
 }
@@ -131,28 +126,20 @@ t_vect	cast_cube(t_sdl *sdl, int a_i)
 	res.v[1] = 0.5;
 	if (a_i > sdl->qpi && a_i <= sdl->qpi3)
 	{
-		res.v[1] = 1.0;
-		res.v[0] += 1 / sdl->tang[a_i] / 2;
-		res.c = 4;
+		set_vc(&res, 0.5 + 1 / sdl->tang[a_i] / 2, 1.0, 4);
 	}
 	else if (a_i > sdl->qpi3 && a_i <= sdl->qpi5)
 	{
-		res.v[0] = 0.0;
-		res.v[1] -= sdl->tang[a_i] / 2;
-		res.c = 5;
+		set_vc(&res, 0.0, 0.5 - sdl->tang[a_i] / 2, 5);
 	}
 	else if (a_i > sdl->qpi5 && a_i <= sdl->qpi7)
 	{
-		res.v[1] = 0.0;
-		res.v[0] -= 1 / sdl->tang[a_i] / 2;
-		res.c = 2;
+		set_vc(&res, 0.5 - 1 / sdl->tang[a_i] / 2, 0.0, 2);
 	}
 	else if ((a_i > sdl->qpi7 && a_i < sdl->tngm)
 		|| (a_i >= 0 && a_i <= sdl->qpi))
 	{
-		res.v[0] = 1.0;
-		res.v[1] += sdl->tang[a_i] / 2;
-		res.c = 3;
+		set_vc(&res, 1.0, 0.5 + sdl->tang[a_i] / 2, 3);
 	}
 	res.v[2] = leng(cent, res);
 	return (res);
