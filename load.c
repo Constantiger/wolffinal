@@ -104,6 +104,26 @@ int		load_map(t_sdl *s)
 	return (1);
 }
 
+void	load_obj_help(t_sdl *sdl, int i, int j)
+{
+	if (isdoory(sdl, i, j))
+		push_doory(sdl, i, j);
+	if (isdoorx(sdl, i, j))
+		push_doorx(sdl, i, j);
+	if (isobj(sdl, i, j))
+		push_obj(sdl, i, j);
+	if (isscor(sdl, i, j))
+		push_score(sdl, i, j);
+	if (iskey(sdl, i, j))
+		push_key(sdl, i, j);
+	if (isenem(sdl, i, j))
+		push_enemy(sdl, i, j);
+	if (isarrow(sdl, i, j))
+		push_arrows(sdl, i, j);
+	if (ishp(sdl, i, j))
+		push_hp(sdl, i, j);
+}
+
 char	load_obj(t_sdl *sdl)
 {
 	int		i;
@@ -122,22 +142,7 @@ char	load_obj(t_sdl *sdl)
 				player = 1;
 				sdl->r.p = set_v(i + 0.5, j + 0.5, 0.5);
 			}
-			if (isdoory(sdl, i, j))
-				push_doory(sdl, i, j);
-			if (isdoorx(sdl, i, j))
-				push_doorx(sdl, i, j);
-			if (isobj(sdl, i, j))
-				push_obj(sdl, i, j);
-			if (isscor(sdl, i, j))
-				push_score(sdl, i, j);
-			if (iskey(sdl, i, j))
-				push_key(sdl, i, j);
-			if (isenem(sdl, i, j))
-				push_enemy(sdl, i, j);
-			if (isarrow(sdl, i, j))
-				push_arrows(sdl, i, j);
-			if (ishp(sdl, i, j))
-				push_hp(sdl, i, j);
+			load_obj_help(sdl, i, j);
 			i++;
 		}
 		j++;
