@@ -6,15 +6,15 @@
 #    By: aannara <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/17 13:24:05 by aannara           #+#    #+#              #
-#    Updated: 2020/02/19 15:25:10 by aannara          ###   ########.fr        #
+#    Updated: 2020/02/20 15:47:26 by aannara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c draw.c load.c vect.c loop.c raycast.c \
-	doorx.c doory.c bmp.c skybox.c object.c actfunc.c \
+SRC = main.c draw.c load.c load2.c vect.c loop.c raycast.c \
+	doorx.c doory.c bmp.c skybox.c object.c actfunc.c quit.c \
 	animfunc.c text.c weapon.c weapon2.c set.c tiles.c tiles2.c \
 	load_res.c tiles3.c hp.c move.c move2.c key.c envi.c mouse.c \
-	action.c render.c render2.c render3.c enemy.c enemy2.c enemy3.c quit.c
+	action.c render.c render2.c render3.c enemy.c enemy2.c enemy3.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,22 +6,11 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:16:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/29 15:23:30 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:45:30 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
-
-int		c(int r, int g, int b)
-{
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return ((r << 16) + (g << 8) + b);
-}
 
 void	put_pixel(t_sdl *sdl, int x, int y, int color)
 {
@@ -57,15 +46,6 @@ void	put_ly(t_sdl *sdl, t_vect p1, t_vect d, int color)
 				i + p1.v[1], color);
 		i++;
 	}
-}
-
-int		modd(float a, float b)
-{
-	if (a < 0)
-		a = -a;
-	if (b < 0)
-		b = -b;
-	return (a > b);
 }
 
 void	put_line(t_sdl *sdl, t_vect p1, t_vect p2, int color)

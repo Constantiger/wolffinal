@@ -6,36 +6,11 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:24:05 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 18:40:09 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:44:21 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
-
-int		valid_map(t_sdl *s)
-{
-	int	i;
-	int	j;
-
-	if (s->msx < 3 || s->msy < 3)
-		return (4);
-	i = 0;
-	j = 0;
-	while (j < s->msy)
-	{
-		while (i < s->msx)
-		{
-			if ((i == 0 || i == (s->msx - 1)) && s->m[i][j] != '1')
-				return (2);
-			if ((j == 0 || j == (s->msy - 1)) && s->m[i][j] != '1')
-				return (3);
-			i++;
-		}
-		j++;
-		i = 0;
-	}
-	return (1);
-}
 
 int		read_map(char *s)
 {
@@ -49,26 +24,12 @@ int		read_map(char *s)
 	return (red);
 }
 
-int		load_map(t_sdl *s)
+void	set_map(t_sdl *s, char *map, int k, int j)
 {
-	char	map[1001];
-	int		i;
-	int		j;
-	int		k;
-	char	err;
+	int	i;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	err = 0;
-	if (read_map(map) == 0)
-	{
-		write(1, "file error\n", 11);
-		return (1);
-	}
-	s->msx = 100;
-	s->msy = 100;
-	while (k < 1002)
+	while (k++ < 1002)
 	{
 		if (map[k] == '\n')
 		{
@@ -87,13 +48,25 @@ int		load_map(t_sdl *s)
 			s->m[i][j] = map[k];
 			i++;
 		}
-		if (i == 100)
-		{
-			i = 0;
-			j++;
-		}
-		k++;
+		j += i / 100;
+		i = i / ((i / 100) * 99 + 1);
 	}
+}
+
+int		load_map(t_sdl *s)
+{
+	char	map[1001];
+	char	err;
+
+	err = 0;
+	if (read_map(map) == 0)
+	{
+		write(1, "file error\n", 11);
+		return (1);
+	}
+	s->msx = 100;
+	s->msy = 100;
+	set_map(s, map, -1, 0);
 	if ((err = valid_map(s)) != 1)
 	{
 		err += '0';
