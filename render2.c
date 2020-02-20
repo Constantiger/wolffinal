@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:42:00 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/18 17:59:05 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:12:33 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_map(t_sdl *s)
 		while (i < s->msx)
 		{
 			if (s->m[i][j] == '1')
-				put_box(s, i * s->bs + 25, j * s->bs + 25, s->bs, 255);
+				put_box(s, set_b(i * s->bs + 25, j * s->bs + 25, s->bs), 255);
 			i++;
 		}
 		j++;
@@ -34,8 +34,8 @@ void	draw_map(t_sdl *s)
 	while (i < s->obj_count)
 	{
 		j = s->bs * s->obj[i].bord;
-		put_box(s, s->obj[i].p.v[0] * s->bs + 25 - j / 2,
-			s->obj[i].p.v[1] * s->bs + 25 - j / 2, j, c(255, 0, 255));
+		put_box(s, set_b(s->obj[i].p.v[0] * s->bs + 25 - j / 2,
+			s->obj[i].p.v[1] * s->bs + 25 - j / 2, j), c(255, 0, 255));
 		i++;
 	}
 }
@@ -51,7 +51,7 @@ void	draw_ray(t_sdl *s, t_ray r)
 	sz = s->bs * s->bord;
 	x = r.p.v[0] * s->bs;
 	y = r.p.v[1] * s->bs;
-	put_box(s, x + 25 - sz / 2, y + 25 - sz / 2, sz, color);
+	put_box(s, set_b(x + 25 - sz / 2, y + 25 - sz / 2, sz), color);
 	put_line(s, set_v(x + 25, y + 25, 0.0),
 		set_v(x + cos(s->x_ang) * 200 + 25,
 		y + sin(s->x_ang) * 200 + 25, 0.0), color);

@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:16:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 15:45:30 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:08:02 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ void	put_line(t_sdl *sdl, t_vect p1, t_vect p2, int color)
 	}
 }
 
-void	put_box(t_sdl *sdl, int x, int y, int size, int color)
+void	put_box(t_sdl *sdl, t_box b, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (j < size)
+	while (j < b.size)
 	{
-		while (i < size)
+		while (i < b.size)
 		{
-			put_pixel(sdl, i + x, j + y, color);
+			put_pixel(sdl, i + b.x, j + b.y, color);
 			i++;
 		}
 		j++;

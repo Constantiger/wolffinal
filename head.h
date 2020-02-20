@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 15:47:53 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:11:55 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define PI 3.141592
 # define PI2 6.283185
 # define HPI 1.570796
+
+typedef struct		s_box
+{
+	int				x;
+	int				y;
+	int				size;
+}					t_box;
 
 typedef struct		s_vect
 {
@@ -170,7 +177,8 @@ void				set_arrows(t_sdl *sdl, int a);
 int					wallat(t_sdl *s, float x, float y);
 char				detect(t_vect a, float s1, t_vect b, float s2);
 void				put_line(t_sdl *sdl, t_vect p1, t_vect p2, int color);
-void				put_box(t_sdl *sdl, int x, int y, int size, int color);
+void				put_box(t_sdl *sdl, t_box b, int color);
+t_box				set_b(int x, int y, int size);
 void				put_pixel(t_sdl *sdl, int x, int y, int color);
 void				draw(t_sdl *s);
 int					load_map(t_sdl *s);

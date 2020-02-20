@@ -6,13 +6,13 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:41:56 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 15:45:04 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:09:17 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-int	valid_map(t_sdl *s)
+int		valid_map(t_sdl *s)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ int	valid_map(t_sdl *s)
 	return (1);
 }
 
-int	modd(float a, float b)
+int		modd(float a, float b)
 {
 	if (a < 0)
 		a = -a;
@@ -46,7 +46,7 @@ int	modd(float a, float b)
 	return (a > b);
 }
 
-int	c(int r, int g, int b)
+int		c(int r, int g, int b)
 {
 	if (r > 255)
 		r = 255;
@@ -55,4 +55,14 @@ int	c(int r, int g, int b)
 	if (b > 255)
 		b = 255;
 	return ((r << 16) + (g << 8) + b);
+}
+
+t_box	set_b(int x, int y, int size)
+{
+	t_box	b;
+
+	b.x = x;
+	b.y = y;
+	b.size = size;
+	return (b);
 }
