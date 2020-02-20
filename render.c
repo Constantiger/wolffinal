@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:24:56 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 16:10:07 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:26:49 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	draw(t_sdl *sdl)
 {
 	int	i;
 
-	draw_map(sdl);
 	draw_ray(sdl, sdl->r);
 	draw_skybox(sdl);
 	draw_fow(sdl);
@@ -125,5 +124,6 @@ void	draw(t_sdl *sdl)
 	draw_gui(sdl);
 	if (sdl->key)
 		draw_bmp(sdl, WIN_L - 10 - sdl->mx[9], -70, 9);
+	draw_map(sdl);
 	put_box(sdl, set_b(sdl->off + sdl->hsize - 3, HWH - 3, 6), 0);
 }
