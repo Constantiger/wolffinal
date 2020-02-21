@@ -6,15 +6,15 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/01/31 19:04:12 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:11:55 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEAD_H
 # define HEAD_H
 
-# include "SDL2/SDL.h"
-# include "SDL2/SDL_mixer.h"
+# include "SDL.h"
+# include "SDL_mixer.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -28,6 +28,13 @@
 # define PI 3.141592
 # define PI2 6.283185
 # define HPI 1.570796
+
+typedef struct		s_box
+{
+	int				x;
+	int				y;
+	int				size;
+}					t_box;
 
 typedef struct		s_vect
 {
@@ -170,12 +177,17 @@ void				set_arrows(t_sdl *sdl, int a);
 int					wallat(t_sdl *s, float x, float y);
 char				detect(t_vect a, float s1, t_vect b, float s2);
 void				put_line(t_sdl *sdl, t_vect p1, t_vect p2, int color);
-void				put_box(t_sdl *sdl, int x, int y, int size, int color);
+void				put_box(t_sdl *sdl, t_box b, int color);
+t_box				set_b(int x, int y, int size);
 void				put_pixel(t_sdl *sdl, int x, int y, int color);
 void				draw(t_sdl *s);
-int					load_map(t_sdl *s);
+int					load_map(t_sdl *s, char *name);
+int					valid_map(t_sdl *s);
 t_vect				set_v(float x, float y, float z);
+void				set_vc(t_vect *v, float x, float y, int c);
+void				vect_len(t_sdl *sdl, t_vect *res);
 int					c(int r, int g, int b);
+int					modd(float a, float b);
 t_vect				cast_ray(t_sdl *sdl, t_ray r);
 char				check(t_vect *r);
 char				iswall(t_sdl *sdl, int x, int y);
@@ -237,5 +249,31 @@ void				load_texture(t_sdl *sdl, const char *fname);
 void				load_textures(t_sdl *sdl);
 void				load_audio(t_sdl *sdl);
 void				quit(t_sdl *sdl);
+void				move_proj(t_sdl *sdl, int ind);
+void				wall_coll(t_sdl *sdl);
+void				move(t_sdl *sdl);
+void				jump_f(t_sdl *sdl);
+void				collx_cicle(t_sdl *s, float sign);
+void				colly_cicle(t_sdl *s, float sign);
+void				keyup(t_sdl *sdl);
+void				keydown(t_sdl *sdl);
+void				key_logic(t_sdl *sdl);
+void				mousedown(t_sdl *sdl);
+void				mousemove(t_sdl *sdl);
+void				click(t_sdl *sdl);
+void				draw_bmp(t_sdl *sdl, int sx, int sy, int ind);
+void				draw_skybox(t_sdl *sdl);
+void				draw_gui(t_sdl *sdl);
+void				draw_fow(t_sdl *sdl);
+void				draw_ray(t_sdl *s, t_ray r);
+void				draw_map(t_sdl *s);
+void				draw_ceil(int x, int y, t_vect p, t_sdl *sdl);
+void				draw_flor(int x, int y, t_vect p, t_sdl *sdl);
+int					texture_ind(t_sdl *sdl, int i);
+void				move_enemy(t_sdl *sdl, int ind);
+void				see_enemy(t_sdl *sdl, int ind);
+void				coll_enemy(t_sdl *sdl, int ind);
+void				free_textures(t_sdl *s);
+void				music(t_sdl *sdl);
 
 #endif

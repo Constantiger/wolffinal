@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c draw.c load.c load2.c vect.c loop.c raycast.c \
-	doorx.c doory.c bmp.c skybox.c object.c actfunc.c quit.c \
-	animfunc.c text.c weapon.c weapon2.c set.c tiles.c tiles2.c \
-	load_res.c tiles3.c hp.c move.c move2.c key.c envi.c mouse.c \
-	action.c render.c render2.c render3.c enemy.c enemy2.c enemy3.c
+SRC = ./src/main.c ./src/draw.c ./src/load.c ./src/load2.c ./src/vect.c ./src/loop.c ./src/raycast.c \
+	./src/doorx.c ./src/doory.c ./src/bmp.c ./src/skybox.c ./src/object.c ./src/actfunc.c ./src/quit.c \
+	./src/animfunc.c ./src/text.c ./src/weapon.c ./src/weapon2.c ./src/set.c ./src/tiles.c ./src/tiles2.c \
+	./src/load_res.c ./src/tiles3.c ./src/hp.c ./src/move.c ./src/move2.c ./src/key.c ./src/envi.c ./src/mouse.c \
+	./src/action.c ./src/render.c ./src/render2.c ./src/render3.c ./src/enemy.c ./src/enemy2.c ./src/enemy3.c
 
 OBJ = $(SRC:.c=.o)
 
