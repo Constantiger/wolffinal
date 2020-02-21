@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:19:24 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/17 17:21:57 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 14:53:38 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	proj_hit(t_sdl *sdl, int ind)
 					sdl->obj[ind].p.v[2] < (sdl->obj[i].p.v[2]
 						+ sdl->obj[i].size / 2))
 			{
-				printf("arrow hit %i\n", i);
 				sdl->obj[ind].proj = 0;
 				sdl->obj[ind].p.v[0] = 1000.0;
 				if (sdl->obj[i].enem)
