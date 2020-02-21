@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:54 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 16:28:13 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:35:11 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	set1(t_sdl *s)
 	s->spdy = 0.0;
 	s->bs = 15;
 	s->hbs = (float)s->bs / 2;
-	s->msence = 0.01;
+	s->msence = 0.007;
 	s->doorx_count = 0;
 	s->doory_count = 0;
 	s->obj_count = 0;

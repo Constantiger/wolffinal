@@ -6,13 +6,13 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:24:05 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/21 14:46:36 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:04:39 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
 
-int		read_map(char *s, char *name)
+int		read_map(t_sdl *sdl, char *s, char *name)
 {
 	int	fd;
 	int	red;
@@ -21,6 +21,7 @@ int		read_map(char *s, char *name)
 	if (fd < 0)
 		return (0);
 	red = read(fd, s, 1001);
+	next_map(sdl, s, red);
 	return (red);
 }
 
@@ -59,7 +60,7 @@ int		load_map(t_sdl *s, char *name)
 	char	err;
 
 	err = 0;
-	if (read_map(map, name) == 0)
+	if (read_map(s, map, name) == 0)
 	{
 		write(1, "file error\n", 11);
 		return (1);
@@ -74,7 +75,7 @@ int		load_map(t_sdl *s, char *name)
 		write(1, " map error\n", 11);
 		return (0);
 	}
-	s->bs = 375 / s->msx;
+	s->bs = 350 / s->msx;
 	return (1);
 }
 
@@ -96,6 +97,8 @@ void	load_obj_help(t_sdl *sdl, int i, int j)
 		push_arrows(sdl, i, j);
 	if (ishp(sdl, i, j))
 		push_hp(sdl, i, j);
+	if (isend(sdl, i, j))
+		push_end(sdl, i, j);
 }
 
 char	load_obj(t_sdl *sdl)

@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:50:03 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 16:11:55 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:08:44 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ typedef struct		s_sdl
 	Mix_Chunk		*gchunk;
 	char			mouse_look;
 	char			game_over;
+	char			next_level[100];
+	char			has_next;
 }					t_sdl;
 
 void				loop(t_sdl *sdl);
@@ -202,6 +204,7 @@ char				islock(t_sdl *sdl, int x, int y);
 char				isenem(t_sdl *sdl, int x, int y);
 char				isarrow(t_sdl *sdl, int x, int y);
 char				ishp(t_sdl *sdl, int x, int y);
+char				isend(t_sdl *sdl, int x, int y);
 void				push_proj(t_sdl *sdl);
 void				push_doory(t_sdl *sdl, int x, int y);
 void				push_doorx(t_sdl *sdl, int x, int y);
@@ -275,5 +278,9 @@ void				see_enemy(t_sdl *sdl, int ind);
 void				coll_enemy(t_sdl *sdl, int ind);
 void				free_textures(t_sdl *s);
 void				music(t_sdl *sdl);
+void				push_end_help(t_sdl *sdl, int x, int y);
+void				act_end(void *s, int i);
+void				push_end(t_sdl *sdl, int x, int y);
+void				next_map(t_sdl *sdl, char *file, int ind);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 13:39:18 by aannara           #+#    #+#             */
-/*   Updated: 2019/12/28 13:46:32 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:21:17 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	act_hp(void *s, int i)
 	t_sdl	*sdl;
 
 	sdl = (t_sdl*)s;
-	printf("hp\n");
 	sdl->score++;
 	set_hp(sdl, 15);
 	sdl->obj[i].p.v[0] = 1000.0;

@@ -6,7 +6,7 @@
 #    By: aannara <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/17 13:24:05 by aannara           #+#    #+#              #
-#    Updated: 2020/02/21 14:42:58 by aannara          ###   ########.fr        #
+#    Updated: 2020/02/21 15:22:30 by aannara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = ./src/main.c ./src/draw.c ./src/load.c ./src/load2.c ./src/vect.c ./src/lo
 	./src/doorx.c ./src/doory.c ./src/bmp.c ./src/skybox.c ./src/object.c ./src/actfunc.c ./src/quit.c \
 	./src/animfunc.c ./src/text.c ./src/weapon.c ./src/weapon2.c ./src/set.c ./src/tiles.c ./src/tiles2.c \
 	./src/load_res.c ./src/tiles3.c ./src/hp.c ./src/move.c ./src/move2.c ./src/key.c ./src/envi.c ./src/mouse.c \
-	./src/action.c ./src/render.c ./src/render2.c ./src/render3.c ./src/enemy.c ./src/enemy2.c ./src/enemy3.c
+	./src/action.c ./src/end.c ./src/render.c ./src/render2.c ./src/render3.c ./src/enemy.c ./src/enemy2.c ./src/enemy3.c
 
 OBJ = $(SRC:.c=.o)
 

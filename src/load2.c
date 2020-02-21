@@ -6,11 +6,37 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:41:56 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 16:09:17 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:21:39 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "head.h"
+
+void	next_map(t_sdl *sdl, char *file, int ind)
+{
+	int	i;
+	int	k;
+
+	i = ind - 2;
+	k = 0;
+	while (file[i] != 'E')
+	{
+		i--;
+		k++;
+	}
+	i++;
+	if (k == 0)
+		sdl->has_next = 0;
+	else
+		sdl->has_next = 1;
+	sdl->next_level[k] = '\0';
+	k--;
+	while (k >= 0 && k < 99)
+	{
+		sdl->next_level[k] = file[i + k];
+		k--;
+	}
+}
 
 int		valid_map(t_sdl *s)
 {
