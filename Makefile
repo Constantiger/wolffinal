@@ -18,7 +18,7 @@ SRC = ./src/main.c ./src/draw.c ./src/load.c ./src/load2.c ./src/vect.c ./src/lo
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -O3
+FLAGS = -O3 -Wall -Wextra -Werror
 
 SDL_FLAGS = -I include -I SDL_lib/SDL2.framework/Headers -I SDL_lib/SDL2_mixer.framework/Headers
 

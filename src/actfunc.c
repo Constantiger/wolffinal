@@ -56,6 +56,7 @@ void	act_obj(void *s, int i)
 {
 	t_sdl *sdl;
 
+	i = 0;
 	sdl = (t_sdl*)s;
 	printf("knight\n");
 }

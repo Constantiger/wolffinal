@@ -108,7 +108,6 @@ void	put_obj(t_sdl *sdl, int ind, int x, int size)
 void	draw_obj(void *s, int ind)
 {
 	int		l;
-	int		x;
 	float	size;
 	t_sdl	*sdl;
 

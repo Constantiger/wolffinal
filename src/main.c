@@ -100,6 +100,11 @@ int		main(int argc, char **argv)
 {
 	t_sdl	sdl;
 
+	if (argc != 2)
+	{
+		write(1, "Use ./wolf3d <mapfile>\n", 23);
+		return (0);
+	}
 	if (init(&sdl))
 	{
 		write(1, "init error\n", 11);

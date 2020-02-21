@@ -51,7 +51,6 @@ void	put_ly(t_sdl *sdl, t_vect p1, t_vect d, int color)
 void	put_line(t_sdl *sdl, t_vect p1, t_vect p2, int color)
 {
 	t_vect	d;
-	float	temp;
 
 	d.v[0] = p2.v[0] - p1.v[0];
 	d.v[1] = p2.v[1] - p1.v[1];
