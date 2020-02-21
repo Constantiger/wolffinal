@@ -6,7 +6,7 @@
 /*   By: aannara <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:24:05 by aannara           #+#    #+#             */
-/*   Updated: 2020/02/20 15:44:21 by aannara          ###   ########.fr       */
+/*   Updated: 2020/02/21 14:46:36 by aannara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		load_map(t_sdl *s, char *name)
 		write(1, " map error\n", 11);
 		return (0);
 	}
+	s->bs = 375 / s->msx;
 	return (1);
 }
 
